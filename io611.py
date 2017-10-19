@@ -3,7 +3,7 @@
 # Created by Aran-lq, 2017/10/18
 import sys, os, pickle
 
-def func(key, value, flag):
+def func(key, value, flag=0):
     if os.path.exists('./WareData.pkl'):
         pkl_file = open('WareData.pkl','rb')
         WareHouseData = pickle.load(pkl_file)
@@ -30,4 +30,9 @@ if __name__ == "__main__":
     if (len(sys.argv) != 3) and (len(sys.argv)!=4):
         print "Error value, usage: io607 [key] [value]"
         exit()
-    func(sys.argv[1], sys.argv[2], sys.argv[3])
+
+	print len(sys.argv)
+	if len(sys.argv) == 4:    
+		func(sys.argv[1], sys.argv[2], flag=sys.argv[3])
+    else:
+		func(sys.argv[1], sys.argv[2])
