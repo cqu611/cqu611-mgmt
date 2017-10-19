@@ -30,9 +30,8 @@ if __name__ == "__main__":
     if (len(sys.argv) != 3) and (len(sys.argv)!=4):
         print "Error value, usage: io607 [key] [value]"
         exit()
-
-	print len(sys.argv)
-	if len(sys.argv) == 4:    
-		func(sys.argv[1], sys.argv[2], flag=sys.argv[3])
+    if len(sys.argv) == 4:    
+        func(sys.argv[1], sys.argv[2], flag=sys.argv[3])
     else:
-		func(sys.argv[1], sys.argv[2])
+        func(sys.argv[1], sys.argv[2])
+
