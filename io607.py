@@ -1,5 +1,5 @@
 #!/usr/bin/python2.7
-# io607 - A simple program to record info of warehouse in and out
+# io607 - A simple program to record infomation of warehouse in and out
 # Created by Aran-lq, 2017/10/18
 import sys, os, pickle
 
