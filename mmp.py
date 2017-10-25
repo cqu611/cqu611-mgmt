@@ -1,7 +1,7 @@
 #! /bin/python2.7
 # -*- coding: utf-8 -*-
 #
-# mmp - several tools.
+# mmp - several ma-mai-pi tools.
 #
 # @Xiong X. 2017/10/20
 
@@ -22,7 +22,9 @@ There are common MMP commands used in various situations:\n
 def version(args):
     print("MMP version 0.0.1")
 
-
+################################################################################
+## RENAME
+################################################################################
 def mmp_rename(args):
     optlen = len(args)
     mmpdir = ""
@@ -78,20 +80,34 @@ usage: mmp rename [help] [<directory> <format> [-r] [--force]]"""
         cnt += 1
     return 0
 
-
-def mmp_comment(args):
+################################################################################
+## COMMENT
+################################################################################
+def __mmp_comment(path):
     regex = "\/\*[\s\S]*\*\/|\/\/.*"
     reobj = re.compile(regex)
     txt = []
-    with open(args[0], 'rt') as f:
+    with open(path, 'rt') as f:
         for i in f:
             rst, cnt = reobj.subn("", i)
             txt.append(rst)
-    with open(args[0], 'wt') as f:
+    with open(path, 'wt') as f:
         for i in txt:
             f.write(i)
 
 
+def mmp_comment(args):
+    pathes = os.listdir(args[0])
+    for i in pathes:
+        i = os.path.join(args[0], i)
+        if os.path.isfile(i):
+            __mmp_comment(i)
+        elif os.path.isdir(i):
+            mmp_comment(i)
+
+################################################################################
+## CR
+################################################################################
 def mmp_cr(args):
     cnt = 0
     cnt_n = 0
@@ -119,7 +135,9 @@ def mmp_cr(args):
             f.write(i+"\n")
     print "COMPLETED!"
 
-
+################################################################################
+## KEYWORD
+################################################################################
 def __mmp_keyword(f, kw):
     text = list()
     with open(f, "rt") as fp:
@@ -137,7 +155,9 @@ def mmp_keyword(args):
         elif os.path.isdir(i):
             mmp_keyword([i, args[1]])
 
-
+################################################################################
+## COMMAND PARSER AND ENTRANCE OF MMP
+################################################################################
 def parse_command(cmd):
     cmdlen = len(cmd)
     if cmdlen == 0:
